@@ -27,7 +27,6 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView;
     private Button btnResolve;
-    private Button btnBack;
 
     private String resolve;
 
@@ -42,7 +41,6 @@ public class DetailsActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewFull);
         textView = findViewById(R.id.txtCommentFull);
         btnResolve = findViewById(R.id.btnResolve);
-        btnBack = findViewById(R.id.btnBack);
 
         resolve = "Solucionado -> ";
 
@@ -71,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity {
 
                             if (coment.equalsIgnoreCase(comentTextView)) {
                                 zoneSnapshot.child("coment").getRef().setValue(resolve + comentTextView);
-                                //Toast.makeText(DetailsActivity.this, coment, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DetailsActivity.this, "Incidencia Solucionada", Toast.LENGTH_SHORT).show();
 
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
@@ -96,19 +94,12 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DetailsActivity.this, ReportActivity.class);
-                finish();
-            }
-        });
     }
-
 
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Pulsa en Volver para ir atras", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(DetailsActivity.this, ReportActivity.class));
+        finish();
     }
 }
