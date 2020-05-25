@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +41,7 @@ public class DetailsActivity extends AppCompatActivity {
         textView = findViewById(R.id.txtCommentFull);
         btnResolve = findViewById(R.id.btnResolve);
 
-        resolve = " -> Solucionado";
+        resolve = "Solucionado -> ";
 
         database = FirebaseDatabase.getInstance().getReference("Incidencias");
         databaseComent = database.getRef().child("coment");
@@ -66,8 +67,19 @@ public class DetailsActivity extends AppCompatActivity {
                             Log.i(TAG, zoneSnapshot.child("coment").getValue(String.class));
 
                             if (coment.equalsIgnoreCase(comentTextView)) {
-                                zoneSnapshot.child("coment").getRef().setValue(comentTextView + resolve);
+                                zoneSnapshot.child("coment").getRef().setValue(resolve + comentTextView);
                                 //Toast.makeText(DetailsActivity.this, coment, Toast.LENGTH_SHORT).show();
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(new Intent(DetailsActivity.this, ReportActivity.class));
+                                        finish();
+                                    }
+                                }, 3000);
+
+
                             }
                         }
                     }
