@@ -131,4 +131,9 @@ public class ReportActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, "Pulsa en CERRAR SESION para salir", Toast.LENGTH_SHORT).show();
+    }
+
 }
