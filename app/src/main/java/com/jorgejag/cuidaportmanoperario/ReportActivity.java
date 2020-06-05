@@ -31,9 +31,7 @@ public class ReportActivity extends AppCompatActivity {
     private TextView textViewNombre;
 
     private Button btnSingOut;
-    private Button btnIncidencia;
     private ProgressBar progressCircle;
-    private Button btnProfile;
 
     private FirebaseAuth auth;
     private DatabaseReference usersDatabase;
@@ -119,7 +117,7 @@ public class ReportActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.child("user").getValue().toString();
+                    String name = dataSnapshot.child("userName").getValue().toString();
                     textViewNombre.setText("Bienvenido " + name);
                 }
             }

@@ -64,11 +64,11 @@ public class DetailsActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                            String coment = zoneSnapshot.child("coment").getValue(String.class);
-                            Log.i(TAG, zoneSnapshot.child("coment").getValue(String.class));
+                            String coment = zoneSnapshot.child("comment").getValue(String.class);
+                            Log.i(TAG, zoneSnapshot.child("comment").getValue(String.class));
 
                             if (coment.equalsIgnoreCase(comentTextView)) {
-                                zoneSnapshot.child("coment").getRef().setValue(resolve + comentTextView);
+                                zoneSnapshot.child("comment").getRef().setValue(resolve + comentTextView);
                                 Toast.makeText(DetailsActivity.this, "Incidencia Solucionada", Toast.LENGTH_SHORT).show();
 
                                 Handler handler = new Handler();
