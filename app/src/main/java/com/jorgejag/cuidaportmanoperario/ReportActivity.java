@@ -28,13 +28,9 @@ import java.util.List;
 
 public class ReportActivity extends AppCompatActivity {
 
-    private TextView textViewNombre;
-
-    private Button btnSingOut;
     private ProgressBar progressCircle;
 
-    private FirebaseAuth auth;
-    private DatabaseReference usersDatabase;
+
     private DatabaseReference reportsDatabase;
 
     private RecyclerView recyclerView;
@@ -47,17 +43,16 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reports);
 
-        btnSingOut = findViewById(R.id.btnSingOut);
-        textViewNombre = findViewById(R.id.textViewName);
         progressCircle = findViewById(R.id.progressCircle);
 
-        auth = FirebaseAuth.getInstance();
-        usersDatabase = FirebaseDatabase.getInstance().getReference();
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressCircle = findViewById(R.id.progressCircle);
+
+
 
         uploads = new ArrayList<>();
 
@@ -71,67 +66,23 @@ public class ReportActivity extends AppCompatActivity {
 
                 imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
                 recyclerView.setAdapter(imageAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
-                recyclerView.smoothScrollToPosition(recyclerView.getBottom());
+                recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
+                progressCircle = findViewById(R.id.progressCircle);
                 progressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                progressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
-        //Hacer logout
-        btnSingOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-                startActivity(new Intent(ReportActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
-
-        // OneSignal Initialization
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
-
-        String email = auth.getCurrentUser().getEmail().toString();
-        //Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
-
-        OneSignal.sendTag("User_ID", email);
-
-        getUserInfo();
-
-    }
-
-    //Trabaja con el usuario que ha iniciado sesion
-    //Pedimos a la base de datos los datos del id que ha iniciado sesion
-    private void getUserInfo() {
-        String id = auth.getCurrentUser().getUid();
-        usersDatabase.child("Usuarios").child(id).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String name = dataSnapshot.child("userName").getValue().toString();
-                    textViewNombre.setText("Bienvenido " + name);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, "Pulsa en CERRAR SESION para salir", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(ReportActivity.this, HomeActivity.class));
+        finish();
     }
 
 }

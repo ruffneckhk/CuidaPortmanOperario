@@ -33,4 +33,6 @@
     <string name="nombre_actual">Nombre actual:</string>
     <string name="email_actual">Email actual:</string>
     <string name="volver">Volver</string>
+    <string name="ver_Incidencias">Ver Incidencias</string>
+    <string name="Wellcome">"Bienvenido "</string>
 </resources>
