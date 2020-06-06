@@ -59,8 +59,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        getUserInfo();
-
         // OneSignal Initialization
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -71,6 +69,8 @@ public class HomeActivity extends AppCompatActivity {
         //Toast.makeText(this, email, Toast.LENGTH_SHORT).show();
 
         OneSignal.sendTag("User_ID", email);
+
+        getUserInfo();
 
     }
 
