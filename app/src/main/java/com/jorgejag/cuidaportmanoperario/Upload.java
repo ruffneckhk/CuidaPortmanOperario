@@ -4,10 +4,19 @@ public class Upload {
 
     private String comment;
     private String imageUrl;
+    private String timestamp;
+
+    public Upload(String comment, String imageUrl, String timestamp) {
+        this.comment = comment;
+        this.imageUrl = imageUrl;
+        this.timestamp = timestamp;
+    }
 
     public Upload() {
 
     }
+
+
 
     public Upload(String comment, String imageUrl) {
 
@@ -17,6 +26,14 @@ public class Upload {
 
         this.comment = comment;
         this.imageUrl = imageUrl;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getComment() {

@@ -35,4 +35,7 @@
     <string name="volver">Volver</string>
     <string name="ver_Incidencias">Ver Incidencias</string>
     <string name="Wellcome">"Bienvenido "</string>
+    <string name="channel_name">Notifications Channel</string>
+    <string name="channel_description">Channel Description</string>
+    <string name="activarNotificaciones">Activar Notificaciones</string>
 </resources>
