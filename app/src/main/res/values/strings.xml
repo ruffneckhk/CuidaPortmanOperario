@@ -33,9 +33,8 @@
     <string name="nombre_actual">Nombre actual:</string>
     <string name="email_actual">Email actual:</string>
     <string name="volver">Volver</string>
+    <string name="Wellcome">Bienvenido </string>
     <string name="ver_Incidencias">Ver Incidencias</string>
-    <string name="Wellcome">"Bienvenido "</string>
-    <string name="channel_name">Notifications Channel</string>
-    <string name="channel_description">Channel Description</string>
-    <string name="activarNotificaciones">Activar Notificaciones</string>
+    <string name="channel_name">CHANNEL NAME</string>
+    <string name="channel_description">CHANNEL DESCRIPTION</string>
 </resources>

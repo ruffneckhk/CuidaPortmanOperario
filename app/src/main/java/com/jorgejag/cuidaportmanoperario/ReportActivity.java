@@ -47,6 +47,8 @@ public class ReportActivity extends AppCompatActivity {
 
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
+        uploads = new ArrayList<>();
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,7 +56,7 @@ public class ReportActivity extends AppCompatActivity {
 
 
 
-        uploads = new ArrayList<>();
+
 
         reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,6 +69,7 @@ public class ReportActivity extends AppCompatActivity {
                 imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
+                recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView,null, uploads.size()-1);
                 progressCircle = findViewById(R.id.progressCircle);
                 progressCircle.setVisibility(View.INVISIBLE);
             }

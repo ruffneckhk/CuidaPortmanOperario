@@ -18,18 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.onesignal.OneSignal;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -50,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnSingOut = findViewById(R.id.btnSingOut);
         Button btnReports = findViewById(R.id.btnVerIncidecias);
-        Button btnNotifications = findViewById(R.id.btnActivarNotificaciones);
+        //Button btnNotifications = findViewById(R.id.btnActivarNotificaciones);
 
         textViewUser = findViewById(R.id.textViewUser);
 
@@ -58,34 +53,20 @@ public class HomeActivity extends AppCompatActivity {
         usersDatabase = FirebaseDatabase.getInstance().getReference();
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
-
-/*        Query lastQuery = reportsDatabase.orderByKey().limitToLast(1);
-        lastQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                String currentTimeStamp = timestamp.toString();
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String stringTimeStamp = data.child("timestamp").getValue().toString();
-                    System.out.println("CURRENT TIME STAMP" + currentTimeStamp);
-                    System.out.println("FIREBASE TIME STAMP" + stringTimeStamp);
-
-                    if (stringTimeStamp.equalsIgnoreCase(stringTimeStamp)) {
-                        System.out.println("Es el mismo");
-                    } else {
-                        triggerNotification();
-                    }
-                }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                triggerNotification();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
 
-       btnNotifications.setOnClickListener(new View.OnClickListener() {
+/*       btnNotifications.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                reportsDatabase.addValueEventListener(new ValueEventListener() {
@@ -100,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                    }
                });
            }
-       });
+       });*/
 
         //Accion de cada boton
         btnReports.setOnClickListener(new View.OnClickListener() {

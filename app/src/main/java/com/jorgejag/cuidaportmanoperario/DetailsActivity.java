@@ -75,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        startActivity(new Intent(DetailsActivity.this, ReportActivity.class));
+                                        startActivity(new Intent(DetailsActivity.this, HomeActivity.class));
                                         finish();
                                     }
                                 }, 3000);
