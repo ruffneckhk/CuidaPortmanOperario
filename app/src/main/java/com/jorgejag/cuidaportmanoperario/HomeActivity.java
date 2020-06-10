@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
 
-        reportsDatabase.limitToLast(1).addValueEventListener(new ValueEventListener() {
+        reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 triggerNotification();
@@ -129,16 +129,14 @@ public class HomeActivity extends AppCompatActivity {
 
     //Canal de notificaciones
     private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+        // Creamos el canal de Notificaciones, pero solo en el API26+
+        // porque la clase NotificationChannel es nueva y no esta en la libreria de soporte
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
             String description = getString(R.string.channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
@@ -146,24 +144,20 @@ public class HomeActivity extends AppCompatActivity {
 
     //Disparador de notificacion
     private void triggerNotification() {
-
-        // Create an explicit intent for an Activity in your app
+        //Creamos un intent explicito
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_add_alert_black_24dp)
                 .setContentTitle("Cuida Portman Notificacion")
-                .setContentText("Se ha creado o solucionado una incidencia")
+                .setContentText("Nueva incidencia o incidencia modificada")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                // Set the intent that will fire when the user taps the notification
-                .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-        // notificationId is a unique int for each notification that you must define
+        //el notification id es unico para cada notificacion
         notificationManager.notify(1, builder.build());
     }
 }
