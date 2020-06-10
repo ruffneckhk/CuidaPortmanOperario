@@ -45,15 +45,14 @@ public class HomeActivity extends AppCompatActivity {
 
         Button btnSingOut = findViewById(R.id.btnSingOut);
         Button btnReports = findViewById(R.id.btnVerIncidecias);
-        //Button btnNotifications = findViewById(R.id.btnActivarNotificaciones);
-
         textViewUser = findViewById(R.id.textViewUser);
 
         auth = FirebaseAuth.getInstance();
         usersDatabase = FirebaseDatabase.getInstance().getReference();
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
-        reportsDatabase.addValueEventListener(new ValueEventListener() {
+
+        reportsDatabase.limitToLast(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 triggerNotification();
@@ -65,23 +64,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-/*       btnNotifications.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               reportsDatabase.addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       triggerNotification();
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                   }
-               });
-           }
-       });*/
 
         //Accion de cada boton
         btnReports.setOnClickListener(new View.OnClickListener() {

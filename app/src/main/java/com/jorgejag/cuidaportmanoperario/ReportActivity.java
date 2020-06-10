@@ -55,9 +55,6 @@ public class ReportActivity extends AppCompatActivity {
         progressCircle = findViewById(R.id.progressCircle);
 
 
-
-
-
         reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,16 +63,18 @@ public class ReportActivity extends AppCompatActivity {
                     uploads.add(upload);
                 }
 
+                //Añadimos el contenido del uploads a la recyclerview
                 imageAdapter = new ImageAdapter(ReportActivity.this, uploads);
+                progressCircle.setVisibility(View.INVISIBLE);
                 recyclerView.setAdapter(imageAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
-                recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView,null, uploads.size()-1);
-                progressCircle = findViewById(R.id.progressCircle);
-                progressCircle.setVisibility(View.INVISIBLE);
+                //Muevo la posicion de la recyclerview a la ultima posicion anadida
+                recyclerView.getLayoutManager().smoothScrollToPosition(recyclerView, null, uploads.size() - 1);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressCircle.setVisibility(View.INVISIBLE);
                 Toast.makeText(ReportActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
