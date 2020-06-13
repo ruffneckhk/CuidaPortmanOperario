@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private TextView textViewUser;
 
+    //String para el canal de notificaciones
     private static final String CHANNEL_ID = "MY_CHANNEL_ID";
 
     private FirebaseAuth auth;
@@ -51,7 +52,8 @@ public class HomeActivity extends AppCompatActivity {
         usersDatabase = FirebaseDatabase.getInstance().getReference();
         reportsDatabase = FirebaseDatabase.getInstance().getReference("Incidencias");
 
-
+        //Creamos un addValueEventListener sobre el nodo incidencias, cuando exista un cambio
+        //en el nodo llamada a triggerNotificacion para mostrar la notificacion en la app
         reportsDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

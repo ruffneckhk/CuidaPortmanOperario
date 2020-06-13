@@ -56,18 +56,22 @@ public class DetailsActivity extends AppCompatActivity {
         textView.setText(comentTextView);
         imageView.setImageBitmap(bitmap);
 
+        //Boton para marcar como resuelta una incidencia
         btnResolve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Creamos un listener sobre el nodo Incidencias
                 database.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Recorremos todas las instantaneas del nodo, y modificamos el comentario que coincida
+                        //con el seleccionado
                         for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
                             String coment = zoneSnapshot.child("comment").getValue(String.class);
                             Log.i(TAG, zoneSnapshot.child("comment").getValue(String.class));
 
                             if (coment.equalsIgnoreCase(comentTextView)) {
+                                //Agrega "Solucionado" delante del comentario de la incidencia
                                 zoneSnapshot.child("comment").getRef().setValue(resolve + comentTextView);
                                 Toast.makeText(DetailsActivity.this, "Incidencia Solucionada", Toast.LENGTH_SHORT).show();
 

@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:padding="20dp"
-    android:background="@drawable/background"
     tools:context=".HomeActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/customborder"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_margin="8dp">
 
-        <ImageView
-            android:id="@+id/imageViewFull"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/imagefull"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtCommentFull"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="15sp"/>
+            <ImageView
+                android:id="@+id/imageViewFull"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/imagefull"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txtCommentFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
