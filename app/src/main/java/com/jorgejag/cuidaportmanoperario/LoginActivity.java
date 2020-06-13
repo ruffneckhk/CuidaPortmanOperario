@@ -73,15 +73,5 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Para mantener la sesion abierta, comprobamos si el usuario ha hecho login anteriormente
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }
-    }
 }
 
